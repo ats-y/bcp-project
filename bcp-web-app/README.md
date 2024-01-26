@@ -1,7 +1,16 @@
-# Vue 3 + Vite
+# 安否登録Webアプリ
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## プロジェクト作成記録
 
-## Recommended IDE Setup
+### プロジェクトの新規作成
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+[こちら](../REAMDME.md)参照。
+
+### Vuetify の導入
+
+CSS フレームワークとして[Vuetify](https://vuetifyjs.com/en/)を利用します。
+
+```sh
+cd bcp-web-app
+npm install vuetify@3.4.3
+```

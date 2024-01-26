@@ -2,7 +2,9 @@
 
 ## プロジェクト構築記録
 
-### Vue3によるフロントエンドプロジェクトの作成
+### Vue3 によるフロントエンドプロジェクトの作成
+
+#### プロジェクトの新規作成
 
 ```sh
 npm init vite@latest bcp-web-app
@@ -26,3 +28,5 @@ Done. Now run:
   npm install
   npm run dev
 ```
+
+以降の手順は、[こちら](./bcp-web-app/README.md)参照。
