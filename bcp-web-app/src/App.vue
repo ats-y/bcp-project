@@ -1,6 +1,13 @@
 <script setup>
-import { ref } from "Vue";
+import { ref, inject } from "Vue";
 import LoginComponent from "./components/pages/LoginComponent.vue";
+import { loginUserStoreKey } from "./stores/LoginUserStore";
+
+/**
+ * ログインユーザストアを注入する。
+ * @type {ref<import "../../models/LoginUser">}
+ */
+const loginUserStore = inject(loginUserStoreKey);
 
 /**
  * ナビゲーションドロアーの表示状態。
@@ -13,6 +20,9 @@ const isShowDrawer = ref(false);
  */
 const onLogout = () => {
   console.log("onLogout()");
+
+  // ログインユーザストアのログインユーザを削除。
+  loginUserStore.value = null;
 };
 </script>
 
@@ -32,7 +42,7 @@ const onLogout = () => {
       <!-- <v-spacer></v-spacer> -->
 
       <!-- ログインユーザ名 -->
-      <div class="mr-5">ログイン者</div>
+      <div class="mr-5">{{ loginUserStore?.name }}</div>
     </v-app-bar>
 
     <!-- 画面左部のメニュー領域 -->

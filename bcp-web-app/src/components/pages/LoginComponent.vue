@@ -1,29 +1,48 @@
 <script setup>
-import { ref } from "vue";
+import { ref, inject } from "Vue";
+import { AuthRepository } from "../../repositories/AuthRepository";
+import { loginUserStoreKey } from "../../stores/LoginUserStore";
 
 /**
  * ログインID入力値
- * @type{string}
+ * @type {ref<String>}
  */
 const id = ref();
 
 /**
  * パスワード入力値
- * @type{string}
+ * @type {ref<String>}
  */
 const password = ref();
 
 /**
  * 通信中かどうか
- * @type{Boolean}
+ * @type {ref<Boolean>}
  */
-const loading = ref(false);
+const loading = ref();
 
 /**
- * ログイン
+ * ログインユーザストアを注入する。
+ * @type {ref<import "../../models/LoginUser">}
  */
-const login = () => {
-  console.log("login()");
+const loginUserStore = inject(loginUserStoreKey);
+
+/**
+ * ログインする。
+ */
+const onLogin = async () => {
+  console.log("onLogin()");
+  loading.value = true;
+  try {
+    // 認証する。
+    const authRepo = new AuthRepository();
+    const loginUser = await authRepo.signinAsync(id.value, password.value);
+
+    // ログインユーザをログインユーザストアに格納する。
+    loginUserStore.value = loginUser;
+  } finally {
+    loading.value = false;
+  }
 };
 </script>
 
@@ -57,7 +76,7 @@ const login = () => {
               depressed
               color="primary"
               block
-              @click="login"
+              @click="onLogin"
               :loading="loading"
             >
               ログイン
