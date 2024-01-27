@@ -1,6 +1,5 @@
 <script setup>
 import { ref, inject } from "vue";
-import LoginComponent from "./components/pages/LoginComponent.vue";
 import { loginUserStoreKey } from "./stores/LoginUserStore";
 
 /**
@@ -57,7 +56,8 @@ const onLogout = () => {
 
     <!-- メイン領域 -->
     <v-main class="d-flex align-start justify-center" style="min-height: 300px">
-      <LoginComponent />
+      <!-- ルートとマッチングしたコンポーネントを表示する -->
+      <router-view />
     </v-main>
   </v-app>
 </template>

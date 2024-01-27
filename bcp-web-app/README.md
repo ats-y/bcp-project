@@ -27,3 +27,11 @@ npm install vuetify@3.4.3
 ### Provide / Inject でログイン状態を管理する。
 
 [Provide / Inject](https://ja.vuejs.org/guide/components/provide-inject) を利用して、アプリケーションレベルでログインユーザを提供・注入します。
+
+### Vue Router の導入
+
+[Vue Router](https://router.vuejs.org/) でルーティング制御を行う。
+
+```sh
+npm install vue-router@4
+```

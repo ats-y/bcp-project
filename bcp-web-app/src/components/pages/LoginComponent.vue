@@ -1,7 +1,12 @@
+<!--
+  ログイン画面コンポーネント
+-->
+
 <script setup>
 import { ref, inject } from "vue";
 import { AuthRepository } from "../../repositories/AuthRepository";
 import { loginUserStoreKey } from "../../stores/LoginUserStore";
+import { router } from "../../router";
 
 /**
  * ログインID入力値
@@ -43,6 +48,9 @@ const onLogin = async () => {
   } finally {
     loading.value = false;
   }
+
+  // 安否登録画面へ遷移する。
+  router.push({ name: "registerSafety" });
 };
 </script>
 
