@@ -3,7 +3,10 @@
 -->
 
 <script setup>
-import { ref } from "vue";
+import { ref, inject } from "vue";
+import { loginUserStoreKey } from "../../stores/LoginUserStore";
+import { Safety } from "../../models/Safety";
+import { save } from "../../repositories/SafetyRepository";
 
 /**
  * 安否状況の入力内容
@@ -29,13 +32,37 @@ const reasonNotAbleWork = ref("");
  */
 const message = ref("");
 
-const loading = ref(false);
+/**
+ * 登録中
+ */
+const saving = ref(false);
+
+/**
+ * ログインユーザ
+ * @type ref<{import("../../models/LoginUser").LoginUser}>
+ */
+const loginUser = inject(loginUserStoreKey);
 
 /**
  * 入力した安否状況を登録する。
  */
 const onRegister = async () => {
-  console.log(canWork.value);
+  // 入力内容から安否状況オブジェクトを生成し、登録する。
+  const safty = new Safety(
+    loginUser.value.uid,
+    loginUser.value.name,
+    Date.now(),
+    safetyStatus.value,
+    canWork.value,
+    reasonNotAbleWork.value,
+    message.value
+  );
+  saving.value = true;
+  try {
+    await save(safty);
+  } finally {
+    saving.value = false;
+  }
   alert(`安否情報を登録しました。`);
 };
 </script>
@@ -98,7 +125,7 @@ const onRegister = async () => {
     </v-row>
     <v-row dense>
       <v-col>
-        <v-btn color="primary" @click="onRegister" :loading="loading"
+        <v-btn color="primary" @click="onRegister" :loading="saving"
           >登録</v-btn
         >
       </v-col>
