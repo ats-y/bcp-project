@@ -1,6 +1,7 @@
 <script setup>
 import { ref, inject } from "vue";
 import { loginUserStoreKey } from "./stores/LoginUserStore";
+import { router, routes } from "./router";
 
 /**
  * ログインユーザストアを注入する。
@@ -22,6 +23,9 @@ const onLogout = () => {
 
   // ログインユーザストアのログインユーザを削除。
   loginUserStore.value = null;
+
+  // ログイン画面に遷移する。
+  router.push({ name: "login" });
 };
 </script>
 
@@ -49,6 +53,14 @@ const onLogout = () => {
       <v-list>
         <v-list-item title="メニュー"></v-list-item>
         <v-divider />
+        <!-- ルート定義をメニューに表示する -->
+        <template v-for="item in routes">
+          <v-list-item
+            v-if="item.displayText != null"
+            :title="item.displayText"
+            :to="item.path"
+          />
+        </template>
         <v-divider />
         <v-list-item title="ログアウト" @click="onLogout"> </v-list-item>
       </v-list>
