@@ -5,6 +5,7 @@ export class LoginUser {
   /**
    * コンストラクタ
    * @param {String} uid
+   * @param {String} name
    * @param {String} email
    */
   constructor(uid, name, email) {

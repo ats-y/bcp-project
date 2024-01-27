@@ -12,7 +12,7 @@ export class AuthRepository {
    * @returns {LoginUser} ログインユーザ情報。
    */
   async signinAsync(id, password) {
-    await sleepAsync(2000);
-    return new LoginUser(id, "すたぶ しめい", "stub_user@test.com");
+    await sleepAsync(1000);
+    return new LoginUser("DummyUid", "すたぶ しめい", "stub_user@test.com");
   }
 }

@@ -60,6 +60,10 @@ const onRegister = async () => {
   saving.value = true;
   try {
     await save(safty);
+  } catch (error) {
+    alert(error);
+    console.error(error);
+    return;
   } finally {
     saving.value = false;
   }

@@ -28,7 +28,7 @@ export class Safety {
 
   /**
    * 勤務可否。
-   * @type {Boolean}
+   * @type {String}
    */
   canWork;
 
@@ -50,7 +50,7 @@ export class Safety {
    * @param {String} name 対象者の氏名。
    * @param {Date} timestamp 安否状況登録日時。
    * @param {String} safetyStatus 安否状況。
-   * @param {Boolean} canWork 勤務可否。
+   * @param {String} canWork 勤務可否。
    * @param {String} reasonNotAbleWork 勤務不可理由。
    * @param {String} message メッセージ。
    */
