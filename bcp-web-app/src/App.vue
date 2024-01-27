@@ -1,5 +1,5 @@
 <script setup>
-import { ref, inject } from "Vue";
+import { ref, inject } from "vue";
 import LoginComponent from "./components/pages/LoginComponent.vue";
 import { loginUserStoreKey } from "./stores/LoginUserStore";
 

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, inject } from "Vue";
+import { ref, inject } from "vue";
 import { AuthRepository } from "../../repositories/AuthRepository";
 import { loginUserStoreKey } from "../../stores/LoginUserStore";
 
