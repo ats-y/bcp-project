@@ -1,7 +1,7 @@
 <script setup>
 import { ref, inject } from "vue";
 import { loginUserStoreKey } from "./stores/LoginUserStore";
-import { router, routes } from "./router";
+import { router, routes, hasAuthority } from "./router";
 
 /**
  * ログインユーザストアを注入する。
@@ -56,7 +56,7 @@ const onLogout = () => {
         <!-- ルート定義をメニューに表示する -->
         <template v-for="item in routes">
           <v-list-item
-            v-if="item.displayText != null"
+            v-if="hasAuthority(item) && item.displayText != null"
             :title="item.displayText"
             :to="item.path"
           />
