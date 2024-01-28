@@ -4,7 +4,7 @@
 
 <script setup>
 import { ref, inject } from "vue";
-import { AuthRepository } from "../../repositories/AuthRepository";
+import { createAuthRepository } from "../../repositories/AuthRepositoryFactory";
 import { loginUserStoreKey } from "../../stores/LoginUserStore";
 import { router } from "../../router";
 
@@ -40,11 +40,14 @@ const onLogin = async () => {
   loading.value = true;
   try {
     // 認証する。
-    const authRepo = new AuthRepository();
+    const authRepo = createAuthRepository();
     const loginUser = await authRepo.signinAsync(id.value, password.value);
 
     // ログインユーザをログインユーザストアに格納する。
     loginUserStore.value = loginUser;
+  } catch (error) {
+    console.error(error);
+    alert(error);
   } finally {
     loading.value = false;
   }

@@ -76,11 +76,33 @@ Firebase Web コンソールの`プロジェクトの設定` - `マイアプリ`
 
 #### Firestore Database の利用開始
 
-Firebase Web コンソールの左側のメニューで`構築`-`Firestore Database`をクリックし、`データベースの作成`をクリックする。
+Firebase Web コンソールで、以下を操作する。
+
+1. 左側のメニューで`構築`-`Firestore Database`をクリックし、`データベースの作成`をクリックする。
 
 1. `名前とロケーションを設定する`では、任意のロケーションを選択する。
 
 1. `ルールをセキュアにする`では、`テストモードで開始する`を選択する。
 
-本 Vue プロジェクトに Firebase への登録処理を実装する。  
-（`src/repositories/SafetyRepository.js`）
+本 Vue プロジェクトに Firestore への登録処理を実装する。
+
+- src/repositories/SafetyRepository.js
+
+#### Authentication の利用開始
+
+Firebase Web コンソールで、以下を操作する。
+
+1. 左側のメニューで`構築`-`Authentication`をクリックする。
+
+1. `Sign-in method`タブを選択し、ログイン プロバイダから`メール/パスワード`をクリックする。
+
+1. `メール / パスワード`を`有効にする`に設定し、`保存`ボタンをクリックする。
+
+1. `Users`タブを選択し、`ユーザーを追加`ボタンをクリック。
+
+1. `メール`と`パスワード`を入力して`ユーザーを追加`ボタンをクリックする。
+
+本 Vue プロジェクトに Firebase への登録処理を実装する。
+
+- src/repositories/AuthRepositoryFirebase.js
+- src/components/pages/LoginComponent.vue
