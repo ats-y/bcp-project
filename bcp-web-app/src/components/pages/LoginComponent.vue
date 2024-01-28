@@ -39,11 +39,13 @@ const loginUserStore = inject(loginUserStoreKey);
 const onLogin = async () => {
   console.log("onLogin()");
   loading.value = true;
+  /** @type {import("../../models/LoginUser").LoginUser} */
+  let loginUser;
   try {
     // 認証する。
     /** @type {import("../../repositories/AuthRepository").AuthRepository} */
     const authRepo = createAuthRepository();
-    const loginUser = await authRepo.signinAsync(id.value, password.value);
+    loginUser = await authRepo.signinAsync(id.value, password.value);
 
     // ユーザー情報を取得する。
     loginUser.user = await getUser(loginUser.uid);
@@ -58,8 +60,14 @@ const onLogin = async () => {
     loading.value = false;
   }
 
-  // 安否登録画面へ遷移する。
-  router.push({ name: "registerSafety" });
+  // 業務画面へ遷移する。
+  if (loginUser.user == null) {
+    // ユーザー情報が未登録の場合は、ユーザープロフィール編集画面へ。
+    router.push({ name: "editProfile" });
+  } else {
+    // 安否登録画面へ遷移する。
+    router.push({ name: "registerSafety" });
+  }
 };
 </script>
 

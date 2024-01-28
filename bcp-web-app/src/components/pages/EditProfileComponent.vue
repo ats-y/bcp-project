@@ -66,7 +66,16 @@ const onSave = async () => {
     isSaving.value = true;
 
     // ユーザー情報を更新する。
-    const user = new User(loginUserStore.value.uid, input.value.name, null);
+    /** @type {User} */
+    let user;
+    if (!loginUserStore.value.user) {
+      // ユーザー情報が未登録の場合は新規作成する。
+      user = new User(loginUserStore.value.uid, input.value.name, null);
+    } else {
+      // ユーザー情報が登録済みの場合は、属性のみ更新する。
+      user = loginUserStore.value.user;
+      user.name = input.value.name;
+    }
     try {
       await saveUser(user);
     } catch (error) {
@@ -84,9 +93,13 @@ const onSave = async () => {
       alert("パスワードの更新に失敗しました。");
       return;
     }
+
+    // ログインユーザーのユーザー情報を更新する。
+    loginUserStore.value.user = user;
   } finally {
     isSaving.value = false;
   }
+
   alert("パスワード変更完了！");
 };
 

@@ -6,8 +6,18 @@ import RegisterSafetyComponent from "../components/pages/RegisterSafetyComponent
 import EditProfileComponent from "../components/pages/EditProfileComponent.vue";
 
 /**
+ * 本アプリのルート定義。
+ * @typedef {Object} myRoute
+ * @property {String} path Vue routerのRouteRecordSingleView.path
+ * @property {String} name Vue routerのRouteRecordSingleView.name
+ * @property {String} component Vue routerのRouteRecordSingleView.path
+ * @property {String} displayText 表示文字列。
+ * @property {String[]} allow ルートを利用できる権限一覧。未定義の場合は制限なし。
+ */
+/**
  * ルート定義。
  * ルートとコンポーネントをマッピング。
+ * @type {myRoute[]}
  */
 export const routes = [
   {
@@ -50,6 +60,54 @@ router.beforeEach((to, from, next) => {
       next({ name: "login" });
       return;
     }
+
+    // 遷移先のルートへ遷移する権限がなければ処理中断し、画面遷移を取り消し。
+    const actualTo = routes.find((element) => element.name == to.name);
+    if (!hasAuthority(actualTo)) {
+      console.log("no authority");
+      return;
+    }
   }
+
   next();
 });
+
+/**
+ * ルートに遷移する権限があるか判定する。
+ * @param {myRoute} to ルート
+ * @returns {Boolean} 遷移可否（true:遷移可）
+ */
+export const hasAuthority = (to) => {
+  // ログイン画面への移動はどんな状態でもOK。
+  if (to.name == "login") {
+    return true;
+  }
+
+  // ログイン画面以外は、ログイン状態であれば遷移可。
+  const loginUser = inject(loginUserStoreKey);
+  if (loginUser.value != null) {
+    // ログインユーザーの状態による。
+    if (!loginUser.value.user) {
+      // ユーザー情報が未設定の場合は、ユーザープロフィール編集画面のみ遷移可。
+      if (to.name == "editProfile") {
+        return true;
+      }
+    } else {
+      // ルートに権限設定がなければ遷移可。
+      if (to.allow == null || to.allow.length == 0) {
+        return true;
+      }
+
+      // ログインユーザーの権限が、遷移先に権限があるか。
+      for (const a of to.allow) {
+        if (loginUser.value.user.roles?.includes(a)) {
+          // 権限あり。
+          return true;
+        }
+      }
+    }
+  }
+
+  // 上記以外は遷移不可。
+  return false;
+};
