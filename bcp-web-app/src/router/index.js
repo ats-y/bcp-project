@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import { loginUserStoreKey } from "../stores/LoginUserStore";
 import LoginComponent from "../components/pages/LoginComponent.vue";
 import RegisterSafetyComponent from "../components/pages/RegisterSafetyComponent.vue";
+import EditProfileComponent from "../components/pages/EditProfileComponent.vue";
 
 /**
  * ルート定義。
@@ -19,6 +20,12 @@ export const routes = [
     name: "registerSafety",
     component: RegisterSafetyComponent,
     displayText: "安否登録",
+  },
+  {
+    path: "/editProfile",
+    name: "editProfile",
+    component: EditProfileComponent,
+    displayText: "プロファイル編集",
   },
 ];
 

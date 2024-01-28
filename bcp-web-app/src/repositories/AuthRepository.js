@@ -15,4 +15,12 @@ export class AuthRepository {
     await sleepAsync(1000);
     return new LoginUser("DummyUid", "すたぶ しめい", "stub_user@test.com");
   }
+
+  /**
+   * 現在ログイン中のユーザのパスワードを変更する。
+   * @param {String} newPassword 変更後のパスワード
+   */
+  async updatePassword(newPassword) {
+    throw new Error("処理未定義");
+  }
 }

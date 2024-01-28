@@ -68,7 +68,12 @@ const onLogin = async () => {
         </v-row>
         <v-row dense>
           <v-col cols="12">
-            <v-text-field v-model="id" label="ID" outlined></v-text-field>
+            <v-text-field
+              v-model="id"
+              label="ID"
+              outlined
+              type="email"
+            ></v-text-field>
           </v-col>
         </v-row>
         <v-row dense>

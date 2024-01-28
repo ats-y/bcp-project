@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, updatePassword } from "firebase/auth";
 import { auth } from "../plugins/firebase";
 import { AuthRepository } from "./AuthRepository";
 import { LoginUser } from "../models/LoginUser";
@@ -15,10 +15,15 @@ export class AuthRepositoryFirebase extends AuthRepository {
    */
   async signinAsync(id, password) {
     const credential = await signInWithEmailAndPassword(auth, id, password);
-    return new LoginUser(
-      credential.user.uid,
-      "すたぶ しめい",
-      credential.user.email
-    );
+    return new LoginUser(credential.user.uid, null, credential.user.email);
+  }
+
+  /**
+   * 現在ログイン中のユーザのパスワードを変更する。
+   * @param {String} newPassword 変更後のパスワード
+   */
+  async updatePassword(newPassword) {
+    const user = auth.currentUser;
+    await updatePassword(user, newPassword);
   }
 }
