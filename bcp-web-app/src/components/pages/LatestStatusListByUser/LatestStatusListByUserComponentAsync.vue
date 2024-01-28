@@ -5,6 +5,7 @@
 import { ref } from "vue";
 import { getAllUsers } from "../../../repositories/UserRepository";
 import { getUserLatestSafety } from "../../../repositories/SafetyRepository";
+import { Safety } from "../../../models/Safety";
 
 /** データ取得中か */
 const isLoading = ref(false);
@@ -48,6 +49,20 @@ const onRefresh = async () => {
   } finally {
     isLoading.value = false;
   }
+};
+
+/**
+ * 拡張表示可能かどうか判定する。
+ * @param {Safety} status
+ * @returns {Boolean} true:可能。
+ */
+const isShowExpand = (status) => {
+  if (status) {
+    if (0 < status.message?.length || 0 < status.reasonNotAbleWork?.length) {
+      return true;
+    }
+  }
+  return false;
 };
 
 /** 一覧の列定義。 */
@@ -138,6 +153,10 @@ await getLatestUserList();
           <!-- 出勤可否列の表示を制御 -->
           <template v-slot:item.status.canWork="{ item }">
             {{ item?.status?.canWork }}
+            <v-icon
+              v-if="item?.status?.reasonNotAbleWork?.trim()"
+              icon="mdi-message-alert"
+            />
           </template>
 
           <!-- 登録日時列の表示を制御 -->
@@ -147,7 +166,7 @@ await getLatestUserList();
 
           <!--　拡張表示 -->
           <template v-slot:expanded-row="{ columns, item }">
-            <tr v-if="item.status != null">
+            <tr v-if="isShowExpand(item.status)">
               <td :colspan="columns.length">
                 <v-sheet v-if="item.status.message" class="pa-2">
                   <h6>メッセージ</h6>
