@@ -4,6 +4,11 @@ import { loginUserStoreKey } from "../stores/LoginUserStore";
 import LoginComponent from "../components/pages/LoginComponent.vue";
 import RegisterSafetyComponent from "../components/pages/RegisterSafetyComponent.vue";
 import EditProfileComponent from "../components/pages/EditProfileComponent.vue";
+import UserListComponent from "../components/pages/UserList/UserListComponent.vue";
+import {
+  SPECIAL_ROLE_ADMINISTRATOR,
+  SPECIAL_ROLE_MANAGER,
+} from "../models/User";
 
 /**
  * 本アプリのルート定義。
@@ -30,6 +35,13 @@ export const routes = [
     name: "registerSafety",
     component: RegisterSafetyComponent,
     displayText: "安否登録",
+  },
+  {
+    path: "/userlist",
+    name: "userlist",
+    component: UserListComponent,
+    allow: [SPECIAL_ROLE_ADMINISTRATOR],
+    displayText: "ユーザー一覧",
   },
   {
     path: "/editProfile",
@@ -100,7 +112,7 @@ export const hasAuthority = (to) => {
 
       // ログインユーザーの権限が、遷移先に権限があるか。
       for (const a of to.allow) {
-        if (loginUser.value.user.roles?.includes(a)) {
+        if (loginUser.value.user.specialRoles?.includes(a)) {
           // 権限あり。
           return true;
         }

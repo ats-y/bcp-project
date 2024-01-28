@@ -50,7 +50,7 @@ const onRegister = async () => {
   // 入力内容から安否状況オブジェクトを生成し、登録する。
   const safty = new Safety(
     loginUser.value.uid,
-    loginUser.value.name,
+    loginUser.value.user.name,
     Date.now(),
     safetyStatus.value,
     canWork.value,

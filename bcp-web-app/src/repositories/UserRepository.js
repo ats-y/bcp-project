@@ -6,15 +6,13 @@ const COLLECTION_NAME = "Users";
 
 /**
  * 全ユーザ情報を取得する。
- * @returns Userクラス配列。
+ * @returns {User[]} Userクラス配列。
  */
 export const getAllUsers = async () => {
   const result = [];
   const snapshot = await getDocs(collection(firestore, COLLECTION_NAME));
   snapshot.forEach((doc) => {
-    result.push(
-      new User(doc.id, doc.data().name, doc.data().email, doc.data().roles)
-    );
+    result.push(new User(doc.id, doc.data().name, doc.data().roles));
   });
   return result;
 };
@@ -28,12 +26,7 @@ export const getUser = async (uid) => {
   const ref = doc(firestore, COLLECTION_NAME, uid);
   const snapshot = await getDoc(ref);
   if (!snapshot.exists()) return null;
-  return new User(
-    uid,
-    snapshot.data().name,
-    snapshot.data().email,
-    snapshot.data().roles
-  );
+  return new User(uid, snapshot.data().name, snapshot.data().roles);
 };
 
 /**
@@ -44,8 +37,8 @@ export const save = async (user) => {
   // 引数のユーザ情報がProxyの場合があるので、プリミティブな要素で抜き出す。
   const name = user.name;
   let roles = [];
-  if (user.roles != null) {
-    roles = user.roles;
+  if (user.specialRoles != null) {
+    roles = user.specialRoles;
   }
 
   // Firebaseへ登録する。
