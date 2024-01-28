@@ -91,7 +91,7 @@ const onSave = async () => {
 };
 
 // ユーザー情報があれば、氏名を初期表示する。
-input.value.name = loginUserStore.value.name;
+input.value.name = loginUserStore.value.user?.name;
 </script>
 <template>
   <!-- 入力フォーム -->

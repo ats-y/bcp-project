@@ -7,6 +7,7 @@ import { ref, inject } from "vue";
 import { createAuthRepository } from "../../repositories/AuthRepositoryFactory";
 import { loginUserStoreKey } from "../../stores/LoginUserStore";
 import { router } from "../../router";
+import { getUser } from "../../repositories/UserRepository";
 
 /**
  * ログインID入力値
@@ -28,7 +29,7 @@ const loading = ref();
 
 /**
  * ログインユーザストアを注入する。
- * @type {ref<import "../../models/LoginUser">}
+ * @type {ref<import("../../models/LoginUser").LoginUser>}
  */
 const loginUserStore = inject(loginUserStoreKey);
 
@@ -40,14 +41,19 @@ const onLogin = async () => {
   loading.value = true;
   try {
     // 認証する。
+    /** @type {import("../../repositories/AuthRepository").AuthRepository} */
     const authRepo = createAuthRepository();
     const loginUser = await authRepo.signinAsync(id.value, password.value);
+
+    // ユーザー情報を取得する。
+    loginUser.user = await getUser(loginUser.uid);
 
     // ログインユーザをログインユーザストアに格納する。
     loginUserStore.value = loginUser;
   } catch (error) {
     console.error(error);
     alert(error);
+    return;
   } finally {
     loading.value = false;
   }

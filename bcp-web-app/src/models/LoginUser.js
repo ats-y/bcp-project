@@ -1,19 +1,9 @@
+import { User } from "./User";
+
 /**
  * ログインユーザ
  */
 export class LoginUser {
-  /**
-   * コンストラクタ
-   * @param {String} uid
-   * @param {String} name
-   * @param {String} email
-   */
-  constructor(uid, name, email) {
-    this.uid = uid;
-    this.name = name;
-    this.email = email;
-  }
-
   /**
    * UID
    * @type {String}
@@ -21,14 +11,25 @@ export class LoginUser {
   uid;
 
   /**
-   * 氏名
-   * @type {String}
-   */
-  name;
-
-  /**
    * E-Mail
    * @type {String}
    */
   email;
+
+  /**
+   * ユーザー情報
+   * @type {User}
+   */
+  user;
+
+  /**
+   * コンストラクタ
+   * @param {String} uid
+   * @param {String} email
+   */
+  constructor(uid, email) {
+    this.uid = uid;
+    this.email = email;
+    this.user = null;
+  }
 }

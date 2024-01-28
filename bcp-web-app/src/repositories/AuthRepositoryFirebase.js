@@ -15,7 +15,7 @@ export class AuthRepositoryFirebase extends AuthRepository {
    */
   async signinAsync(id, password) {
     const credential = await signInWithEmailAndPassword(auth, id, password);
-    return new LoginUser(credential.user.uid, null, credential.user.email);
+    return new LoginUser(credential.user.uid, credential.user.email);
   }
 
   /**

@@ -45,7 +45,7 @@ const onLogout = () => {
       <!-- <v-spacer></v-spacer> -->
 
       <!-- ログインユーザ名 -->
-      <div class="mr-5">{{ loginUserStore?.name }}</div>
+      <div class="mr-5">{{ loginUserStore?.user?.name }}</div>
     </v-app-bar>
 
     <!-- 画面左部のメニュー領域 -->

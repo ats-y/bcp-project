@@ -13,7 +13,7 @@ export class AuthRepository {
    */
   async signinAsync(id, password) {
     await sleepAsync(1000);
-    return new LoginUser("DummyUid", "すたぶ しめい", "stub_user@test.com");
+    return new LoginUser("DummyUid", "stub_user@test.com");
   }
 
   /**
