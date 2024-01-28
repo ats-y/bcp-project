@@ -2,10 +2,11 @@
 import { ref, inject } from "vue";
 import { loginUserStoreKey } from "./stores/LoginUserStore";
 import { router, routes, hasAuthority } from "./router";
+import { createAuthRepository } from "./repositories/AuthRepositoryFactory";
 
 /**
  * ログインユーザストアを注入する。
- * @type {ref<import "../../models/LoginUser">}
+ * @type {ref<import("./models/LoginUser").LoginUser>}
  */
 const loginUserStore = inject(loginUserStoreKey);
 
@@ -18,8 +19,12 @@ const isShowDrawer = ref(false);
 /**
  * ログアウトする。
  */
-const onLogout = () => {
+const onLogout = async () => {
   console.log("onLogout()");
+
+  // サインアウトする。
+  const authRepo = createAuthRepository();
+  await authRepo.signOutAsync();
 
   // ログインユーザストアのログインユーザを削除。
   loginUserStore.value = null;
@@ -35,6 +40,7 @@ const onLogout = () => {
     <v-app-bar>
       <!-- メニューアイコン -->
       <v-app-bar-nav-icon
+        v-if="loginUserStore"
         @click.stop="isShowDrawer = !isShowDrawer"
       ></v-app-bar-nav-icon>
 

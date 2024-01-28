@@ -17,6 +17,11 @@ export class AuthRepository {
   }
 
   /**
+   * サインアウトする。
+   */
+  async signOutAsync() {}
+
+  /**
    * 現在ログイン中のユーザのパスワードを変更する。
    * @param {String} newPassword 変更後のパスワード
    */
