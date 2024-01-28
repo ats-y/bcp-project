@@ -26,7 +26,7 @@ export class AuthRepositoryFirebase extends AuthRepository {
    * サインアウトする。
    */
   async signOutAsync() {
-    await signOut();
+    await signOut(auth);
   }
 
   /**
