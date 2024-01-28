@@ -81,6 +81,12 @@ v-data-table@item-valueで指定した要素名の値が格納される。
 */
 const expanded = ref([]);
 
+/**
+ * ソート順。
+ * 画面表示直後のソート順を指定しているが、リアクティブなので画面で選択したソート順が随時格納されていく。
+ */
+const sortBy = ref([{ key: "status.timestamp", order: "desc" }]);
+
 // 最新状態を取得する。
 await getLatestUserList();
 </script>
@@ -115,7 +121,7 @@ await getLatestUserList();
           v-model:headers="headerItems"
           v-model:items="userList"
           v-model:expanded="expanded"
-          :sort-by="[{ key: 'status.timestamp', order: 'desc' }]"
+          :sort-by="sortBy"
           item-value="name"
           show-expand
           :loading="isLoading"
