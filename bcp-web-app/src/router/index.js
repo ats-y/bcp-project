@@ -5,6 +5,7 @@ import LoginComponent from "../components/pages/LoginComponent.vue";
 import RegisterSafetyComponent from "../components/pages/RegisterSafetyComponent.vue";
 import EditProfileComponent from "../components/pages/EditProfileComponent.vue";
 import UserListComponent from "../components/pages/UserList/UserListComponent.vue";
+import LatestStatusListByUserComponent from "../components/pages/LatestStatusListByUser/LatestStatusListByUserComponent.vue";
 import {
   SPECIAL_ROLE_ADMINISTRATOR,
   SPECIAL_ROLE_MANAGER,
@@ -35,6 +36,13 @@ export const routes = [
     name: "registerSafety",
     component: RegisterSafetyComponent,
     displayText: "安否登録",
+  },
+  {
+    path: "/latestStatusListByUser",
+    name: "latestStatusListByUser",
+    component: LatestStatusListByUserComponent,
+    allow: [SPECIAL_ROLE_MANAGER],
+    displayText: "最新安否状況一覧",
   },
   {
     path: "/userlist",

@@ -74,11 +74,10 @@ export class Safety {
 
   /**
    * Date値(ms)からyyyy/M/d H:mm形式の文字列を取得します。
-   * @param {Number} source Date値
    * @returns yyyy/M/d H:mm形式の文字列
    */
-  static getTimestampText(source) {
-    const time = new Date(source);
+  getTimestampText() {
+    const time = new Date(this.timestamp);
     return (
       `${time.getFullYear()}/${
         time.getMonth() + 1
