@@ -1,32 +1,45 @@
 # BCP Project
 
+Vue と JavaScript のスキル習得のために作成した安否登録アプリです。
+
+## アプリのユースケース
+
+### ログイン
+
+管理者から ID とパスワードを案内されたユーザーのみ本アプリを利用できます。
+
+![Alt text](image.png)
+
+### 自分の安否状況を登録する。
+
+安否状況を登録し、管理者権限ユーザーに安否状況を共有できます。
+
+![Alt text](image-1.png)
+
+### ユーザーの安否状況を確認する。
+
+ユーザーの最新安否状況を確認できます。  
+※管理者権限を持つユーザーのみ利用可能。
+
+![Alt text](image-2.png)
+
+### ログイン中ユーザーの氏名とパスワードを変更する。
+
+表示氏名とパスワードを変更できます。
+
+![Alt text](image-4.png)
+
+### ユーザーの特別権限を編集する。
+
+ユーザーに対して特別権限を付与・削除できます。  
+※システム管理者権限を持つユーザーのみ利用可能。
+
+![Alt text](image-5.png)
+
+![Alt text](image-6.png)
+
 ## プロジェクト構築記録
 
 ### Vue3 によるフロントエンドプロジェクトの作成
 
-#### プロジェクトの新規作成
-
-```sh
-npm init vite@latest bcp-web-app
-
-Need to install the following packages:
-  create-vite@latest
-Ok to proceed? (y) y
-npm WARN EBADENGINE Unsupported engine {
-npm WARN EBADENGINE   package: 'create-vite@5.1.0',
-npm WARN EBADENGINE   required: { node: '^18.0.0 || >=20.0.0' },
-npm WARN EBADENGINE   current: { node: 'v16.14.0', npm: '8.3.1' }
-npm WARN EBADENGINE }
-✔ Select a framework: › Vue
-✔ Select a variant: › JavaScript
-
-caffolding project in /Users/atsushi/FirebaseProject/BcpProject/bcp-web-app...
-
-Done. Now run:
-
-  cd bcp-web-app
-  npm install
-  npm run dev
-```
-
-以降の手順は、[こちら](./bcp-web-app/README.md)参照。
+フロントエンドの作成記録は、[こちら](./bcp-web-app/README.md)を参照。
